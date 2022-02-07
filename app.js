@@ -4,8 +4,9 @@ import { addFriend, findFriendByName } from './data-utils.js';
 
 const friendsEl = document.querySelector('.friends');
 const mushroomsEl = document.querySelectorAll('.mushrooms');
-const addMushroomButton = document.getElementById('add-mushroom');
-const addFriendButton = document.getElementById('add-friend');
+const addMushroomButton = document.getElementById('add-mushroom-button');
+const addFriendButton = document.getElementById('add-friend-button');
+const friendInputEl = document.getElementById('friend-input');
 // initialize state
 
 let mushroomCount = 3;
@@ -31,20 +32,21 @@ const friendData = [
 
 function displayFriends() {
     for (let friend of friendData) {
-        const friendEl = renderFriend(friendData);
+        const friendEl = renderFriend(friend);
 
         friendEl.addEventListener('click', () => {
+            // I need to better understand what this line is supposed to be doing
             const friendInState = findFriendByName(friend.name, friendData);
-    
+
             if (mushroomCount === 0) {
                 alert('no mushrooms left! go forage for some more');
             }
             if (mushroomCount > 0 && friendInState.satisfaction < 3) {
-                friendInState.happiness++;
+                friendInState.satisfaction++;
                 mushroomCount++;
-        
+
                 displayFriends(friendData);
-                displayMushrooms();    
+                displayMushrooms();
             }
         });
 
@@ -53,7 +55,7 @@ function displayFriends() {
 }
 
 
-function displayMushrooms() { 
+function displayMushrooms() {
     for (let i = 0; i < mushroomCount; i++) {
         const mushroomEl = renderMushroom();
 

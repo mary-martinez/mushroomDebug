@@ -4,7 +4,7 @@ export default function renderMushroom() {
 
 }
 
-function renderFriend(friend) {
+export function renderFriend(friend) {
     const div = document.createElement('div');
     const nameEl = document.createElement('p');
     const emojiEl = document.createElement('p');
@@ -28,5 +28,5 @@ function renderFriend(friend) {
     }
 
     div.append(nameEl, emojiEl);
-
+    return div;
 }
